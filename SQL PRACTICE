@@ -1,0 +1,2 @@
+ 1. In the `people` table, find the `namefirst`, `namelast` and `birthyear` for all players with weight greater than 300 pounds.
+
