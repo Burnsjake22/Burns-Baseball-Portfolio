@@ -1,0 +1,83 @@
+---
+title: "Past5Pitchers"
+author: "Jake Burns"
+date: "2024-10-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+D = read.csv("Past5Pitchers.csv")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+avg_velocity_by_year <- D %>%
+  group_by(year) %>%
+  summarize(avg_fastball_velocity = mean(fastball_avg_speed, na.rm = TRUE))
+
+# View the result
+print(avg_velocity_by_year)
+```
+
+```{r pressure, echo=FALSE}
+ggplot(avg_velocity_by_year, aes(x = year, y = avg_fastball_velocity)) +
+  geom_line(color = "blue") +
+  geom_point(color = "red") +
+  labs(title = "Average Fastball Velocity by Year",
+       x = "Year",
+       y = "Average Fastball Velocity (mph)") +
+  theme_minimal()
+```
+
+
+
+```{r}
+strikeouts_by_year <- D %>%
+  group_by(year) %>%
+  summarize(total_strikeouts = sum(strikeout, na.rm = TRUE))
+
+print(strikeouts_by_year)
+```
+```{r}
+ggplot(strikeouts_by_year, aes(x = year, y = total_strikeouts)) +
+  geom_line(color = "purple") +
+  geom_point(color = "darkred") +
+  labs(title = "Total Strikeouts by Year",
+       x = "Year",
+       y = "Total Strikeouts") +
+  theme_minimal()
+```
+```{r}
+Kpercent_by_year <- D %>%
+  group_by(year) %>%
+  summarize(avg_k_percent = mean(k_percent, na.rm = TRUE))
+
+print(Kpercent_by_year)
+```
+```{r}
+avg_exit_velocity <- D %>%
+  group_by(year) %>%
+  summarize(avg_exit_vel = mean(exit_velocity_avg, na.rm = TRUE))
+
+print(avg_exit_velocity)
+```
+```{r}
+avg_spin_fastball <- D %>%
+  group_by(year) %>%
+  summarize(avg_fastball_spin = mean(fastball_avg_spin, na.rm = TRUE))
+
+print(avg_spin_fastball)
+```
+```{r}
+home_run_by_year <- D %>%
+  group_by(year) %>%
+  summarize(total_hr = sum(home_run, na.rm = TRUE))
+
+print(home_run_by_year)
+```
+
